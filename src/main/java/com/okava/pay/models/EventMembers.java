@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@Table(name = "tags")
+@Table(name = "event_members")
 public class EventMembers extends Model {
 
     @ManyToOne
