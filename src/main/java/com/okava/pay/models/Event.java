@@ -27,7 +27,7 @@ public class Event extends Model {
     @Column(name = "time")
     private LocalDateTime time;
 
-    @Column(name = "bannerImage")
+    @Column(name = "banner_image")
     private String bannerImage;
 
     @Column(name = "status")

@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table(name = "invitations")
-public class Invitations extends Model {
+public class Invitation extends Model {
 
     @ManyToOne
     @JoinColumn(name = "event_id")
