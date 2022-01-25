@@ -1,5 +1,5 @@
 package com.okava.pay.models.enums;
 
 public enum ERole {
-    ADMIN, USER
+    ADMIN, TEACHER, STUDENT, DISCPLINE_STAFF, DOCTOR
 }

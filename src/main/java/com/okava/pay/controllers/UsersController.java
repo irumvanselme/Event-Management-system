@@ -22,7 +22,7 @@ public class UsersController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<ApiResponse> all(@RequestParam(value = "page", defaultValue = Constants.DEFAULT_PAGE_NUMBER) int page, @RequestParam(value = "limit", defaultValue = Constants.DEFAULT_PAGE_SIZE) int limit){
         Pageable pageable = Utility.from(page, limit);
 
@@ -30,7 +30,7 @@ public class UsersController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse> byId(@PathVariable UUID id){
+    public ResponseEntity<ApiResponse> byId(@PathVariable Long id){
 
         return Formatter.ok(userService.findById(id));
     }

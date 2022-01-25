@@ -12,7 +12,7 @@ public interface IUserService {
 
     Page<User> all(Pageable pageable);
 
-    User findById(UUID id);
+    User findById(Long id);
 
     Page<User> byRole(ERole role, Pageable pageable);
 

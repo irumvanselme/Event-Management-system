@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -14,11 +16,6 @@ import java.util.UUID;
 @Setter
 @Table(name = "users")
 public class User extends Model {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private UUID id;
 
     @Column(name = "full_names")
     private String fullNames;
@@ -45,4 +42,8 @@ public class User extends Model {
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private ERole role;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_tags", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private List<Tag> tags = new ArrayList<>();
 }

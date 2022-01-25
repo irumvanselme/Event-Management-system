@@ -32,7 +32,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User findById(UUID id) {
+    public User findById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", id.toString()));
     }
@@ -46,7 +46,7 @@ public class UserServiceImpl implements IUserService {
     public User create(RegisterDTO dto) {
         User user = new User();
 
-        user.setRole(ERole.USER);
+        user.setRole(ERole.STUDENT);
         user.setEmail(dto.getEmail());
         user.setFullNames(dto.getFullNames());
         user.setPassword(Utility.encode(dto.getPassword()));

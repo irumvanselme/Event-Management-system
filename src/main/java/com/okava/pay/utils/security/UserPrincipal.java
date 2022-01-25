@@ -16,7 +16,7 @@ import java.util.*;
 @Setter
 @AllArgsConstructor
 public class UserPrincipal implements UserDetails {
-    private UUID id;
+    private Long id;
 
     private String fullNames;
 
