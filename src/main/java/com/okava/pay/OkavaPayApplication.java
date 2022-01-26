@@ -9,5 +9,4 @@ public class OkavaPayApplication {
     public static void main(String[] args) {
         SpringApplication.run(OkavaPayApplication.class, args);
     }
-
 }

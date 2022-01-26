@@ -1,29 +1,36 @@
 package com.okava.pay.services.impl;
 
+import com.okava.pay.models.Tag;
+import com.okava.pay.models.User;
+import com.okava.pay.models.enums.ERole;
+import com.okava.pay.repositories.IUserRepository;
+import com.okava.pay.services.ITagService;
+import com.okava.pay.services.IUserService;
 import com.okava.pay.utils.Utility;
 import com.okava.pay.utils.dtos.RegisterDTO;
 import com.okava.pay.utils.exceptions.BadRequestException;
 import com.okava.pay.utils.exceptions.ResourceNotFoundException;
-import com.okava.pay.models.User;
-import com.okava.pay.models.enums.ERole;
-import com.okava.pay.repositories.IUserRepository;
-import com.okava.pay.services.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements IUserService {
 
     private final IUserRepository userRepository;
 
-    public UserServiceImpl(IUserRepository userRepository) {
+    private final ITagService tagService;
+
+    @Autowired
+    public UserServiceImpl(IUserRepository userRepository, ITagService tagService) {
         this.userRepository = userRepository;
+        this.tagService = tagService;
     }
 
     @Override
@@ -33,8 +40,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User findById(Long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "id", id.toString()));
+        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id.toString()));
     }
 
     @Override
@@ -51,8 +57,7 @@ public class UserServiceImpl implements IUserService {
         user.setFullNames(dto.getFullNames());
         user.setPassword(Utility.encode(dto.getPassword()));
 
-        if (!isUnique(user))
-            throw new BadRequestException("The provided email is already used in the app");
+        if (!isUnique(user)) throw new BadRequestException("The provided email is already used in the app");
 
         return userRepository.save(user);
     }
@@ -77,7 +82,31 @@ public class UserServiceImpl implements IUserService {
             email = principal.toString();
         }
 
-        return userRepository.findByEmail(email).orElseThrow(
-                () -> new ResourceNotFoundException("User", "email", email));
+        return userRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("User", "email", email));
+    }
+
+    @Override
+    public User addTag(Long userId, Long tagId) {
+        User user = findById(userId);
+        Tag tag = tagService.findById(tagId);
+
+        user.getTags().add(tag);
+
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User removeTag(Long userId, Long tagId) {
+        User user = findById(userId);
+        Tag tag = tagService.findById(tagId);
+
+        user.getTags().remove(tag);
+
+        return userRepository.save(user);
+    }
+
+    @Override
+    public List<User> findMany(List<Long> userIds) {
+        return userRepository.findAllById(userIds);
     }
 }

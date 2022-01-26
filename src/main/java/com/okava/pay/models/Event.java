@@ -3,6 +3,7 @@ package com.okava.pay.models;
 import com.okava.pay.audits.Model;
 import com.okava.pay.models.enums.EEventStatus;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @Table(name = "events")
 public class Event extends Model {
 
@@ -27,10 +29,21 @@ public class Event extends Model {
     @Column(name = "time")
     private LocalDateTime time;
 
+    @Column(name = "duration")
+    private Integer duration;
+
     @Column(name = "banner_image")
     private String bannerImage;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private EEventStatus status;
+    private EEventStatus status = EEventStatus.DRAFT;
+
+    public Event(String title, String description, LocalDateTime time, Integer duration, String bannerImage) {
+        this.title = title;
+        this.description = description;
+        this.time = time;
+        this.duration = duration;
+        this.bannerImage = bannerImage;
+    }
 }

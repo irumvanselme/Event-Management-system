@@ -1,8 +1,10 @@
 package com.okava.pay.models;
 
 import com.okava.pay.audits.Model;
+import com.okava.pay.models.enums.EEventRole;
 import com.okava.pay.models.enums.EInvitationStatus;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,6 +12,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @Table(name = "invitations")
 public class Invitation extends Model {
 
@@ -24,7 +27,18 @@ public class Invitation extends Model {
     @Column(name = "invitation_message")
     private String message;
 
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private EEventRole role;
+
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private EInvitationStatus status;
+    private EInvitationStatus status = EInvitationStatus.PENDING;
+
+    public Invitation(Event event, User user, String message, EEventRole role) {
+        this.event = event;
+        this.user = user;
+        this.message = message;
+        this.role = role;
+    }
 }

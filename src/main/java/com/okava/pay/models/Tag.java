@@ -2,6 +2,7 @@ package com.okava.pay.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @Table(name = "tags")
 public class Tag {
 
@@ -28,4 +30,9 @@ public class Tag {
     @JsonIgnore
     @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
     private List<User> users = new ArrayList<>();
+
+    public Tag(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
 }
