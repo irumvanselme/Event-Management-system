@@ -1,5 +1,6 @@
 package com.okava.pay.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.okava.pay.audits.Model;
@@ -30,6 +31,7 @@ public class Event extends Model {
     private String description;
 
     @Column(name = "time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime time;
 
     @Column(name = "duration")
@@ -48,5 +50,15 @@ public class Event extends Model {
         this.time = time;
         this.duration = duration;
         this.bannerImage = bannerImage;
+    }
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    public LocalDateTime getStartTime() {
+        return this.time;
+    }
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    public LocalDateTime getEndTime() {
+        return this.time.plusHours(this.duration);
     }
 }

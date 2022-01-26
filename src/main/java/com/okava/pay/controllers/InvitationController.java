@@ -14,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/invitations")
 public class InvitationController {
@@ -31,17 +33,17 @@ public class InvitationController {
     }
 
     @PostMapping("/invite")
-    public ResponseEntity<ApiResponse> invite(CreateOrUpdateInvitationDTO dto) {
+    public ResponseEntity<ApiResponse> invite(@Valid @RequestBody CreateOrUpdateInvitationDTO dto) {
         return Formatter.ok(iInvitationService.invite(dto));
     }
 
     @PostMapping("invite-by-tag")
-    public ResponseEntity<ApiResponse> inviteByTag(CreateInvitationsByTagDTO dto) {
+    public ResponseEntity<ApiResponse> inviteByTag(@Valid @RequestBody CreateInvitationsByTagDTO dto) {
         return Formatter.ok(iInvitationService.inviteByTag(dto));
     }
 
     @PostMapping("invite-many")
-    public ResponseEntity<ApiResponse> inviteMany(InviteManyDTO dto) {
+    public ResponseEntity<ApiResponse> inviteMany(@Valid @RequestBody InviteManyDTO dto) {
         return Formatter.ok(iInvitationService.inviteMany(dto));
     }
 
