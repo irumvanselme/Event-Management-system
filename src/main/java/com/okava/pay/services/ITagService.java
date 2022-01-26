@@ -1,7 +1,6 @@
 package com.okava.pay.services;
 
 import com.okava.pay.models.Tag;
-import com.okava.pay.utils.dtos.CreateOrUpdateEventDTO;
 import com.okava.pay.utils.dtos.CreateOrUpdateTagDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +15,7 @@ public interface ITagService {
 
     Tag create(CreateOrUpdateTagDTO dto);
 
-    Tag update(Long id, CreateOrUpdateEventDTO dto);
+    Tag update(Long id, CreateOrUpdateTagDTO dto);
 
     Tag findById(Long id);
 

@@ -1,5 +1,7 @@
 package com.okava.pay.models;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.okava.pay.audits.Model;
 import com.okava.pay.models.enums.EEventStatus;
 import lombok.Getter;
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @Table(name = "events")
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Event extends Model {
 
     @ManyToOne

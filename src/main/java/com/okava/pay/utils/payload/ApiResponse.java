@@ -27,4 +27,8 @@ public class ApiResponse {
     public static ApiResponse badRequest(String message, Object data) {
         return new ApiResponse(HttpStatus.BAD_REQUEST, false, message, data);
     }
+
+    public static ApiResponse created(Object data) {
+        return new ApiResponse(HttpStatus.CREATED, false, null, data);
+    }
 }

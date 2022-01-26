@@ -1,6 +1,8 @@
 package com.okava.pay.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +16,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Table(name = "tags")
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Tag {
 
     @Id

@@ -3,7 +3,6 @@ package com.okava.pay.services.impl;
 import com.okava.pay.models.Tag;
 import com.okava.pay.repositories.ITagRepository;
 import com.okava.pay.services.ITagService;
-import com.okava.pay.utils.dtos.CreateOrUpdateEventDTO;
 import com.okava.pay.utils.dtos.CreateOrUpdateTagDTO;
 import com.okava.pay.utils.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,7 @@ public class TagServiceImpl implements ITagService {
     }
 
     @Override
-    public Tag update(Long id, CreateOrUpdateEventDTO dto) {
+    public Tag update(Long id, CreateOrUpdateTagDTO dto) {
         Tag tag = findById(id);
 
         tag.setTitle(dto.getTitle());

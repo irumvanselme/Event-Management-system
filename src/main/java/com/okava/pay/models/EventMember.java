@@ -1,5 +1,7 @@
 package com.okava.pay.models;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.okava.pay.audits.Model;
 import com.okava.pay.models.enums.EEventRole;
 import lombok.Getter;
@@ -13,6 +15,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Table(name = "event_members")
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class EventMember extends Model {
 
     @ManyToOne

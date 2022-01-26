@@ -1,5 +1,7 @@
 package com.okava.pay.models;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.okava.pay.audits.Model;
 import com.okava.pay.models.enums.EEventRole;
 import com.okava.pay.models.enums.EInvitationStatus;
@@ -14,6 +16,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Table(name = "invitations")
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Invitation extends Model {
 
     @ManyToOne

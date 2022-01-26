@@ -1,6 +1,8 @@
 package com.okava.pay.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.okava.pay.audits.Model;
 import com.okava.pay.models.enums.ERole;
 import lombok.Getter;
@@ -9,12 +11,12 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "users")
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class User extends Model {
 
     @Column(name = "full_names")
