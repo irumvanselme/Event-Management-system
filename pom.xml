@@ -8,11 +8,11 @@
         <version>2.5.6</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.okava</groupId>
+    <groupId>rw.ac.rca</groupId>
     <artifactId>pay</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>OkavaPay</name>
-    <description>OkavaPay</description>
+    <name>RCA_EMS</name>
+    <description>RCA_EMS</description>
     <properties>
         <java.version>11</java.version>
     </properties>
