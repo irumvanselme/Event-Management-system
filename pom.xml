@@ -10,7 +10,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>rw.ac.rca</groupId>
-    <artifactId>pay</artifactId>
+    <artifactId>ems</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>RCA_EMS</name>
     <description>RCA_EMS</description>
