@@ -52,23 +52,19 @@ public class SwaggerAPIDocConfig extends WebMvcConfigurationSupport {
             @Override
             public void addResourceHandlers(ResourceHandlerRegistry registry) {
                 registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
-                registry.addResourceHandler("/webjars/**")
-                        .addResourceLocations("classpath:/META-INF/resources/webjars/");
+                registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
             }
         };
     }
 
     @Bean
     public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2).directModelSubstitute(LocalDate.class, Date.class)
-                .pathProvider(new RelativePathProvider(servletContext) {
-                    @Override
-                    public String getApplicationBasePath() {
-                        return "";
-                    }
-                }).select().apis(RequestHandlerSelectors.basePackage("rw.ac.rca.ems.controllers"))
-                .paths(PathSelectors.any()).build().apiInfo(apiInfo()).securitySchemes(Arrays.asList(apiKey()))
-                .securityContexts(Collections.singletonList(securityContext()));
+        return new Docket(DocumentationType.SWAGGER_2).directModelSubstitute(LocalDate.class, Date.class).pathProvider(new RelativePathProvider(servletContext) {
+            @Override
+            public String getApplicationBasePath() {
+                return "/rca_event_mis";
+            }
+        }).select().apis(RequestHandlerSelectors.basePackage("rw.ac.rca.ems.controllers")).paths(PathSelectors.any()).build().apiInfo(apiInfo()).securitySchemes(Arrays.asList(apiKey())).securityContexts(Collections.singletonList(securityContext()));
     }
 
     private ApiKey apiKey() {
@@ -81,14 +77,12 @@ public class SwaggerAPIDocConfig extends WebMvcConfigurationSupport {
 
     private List<SecurityReference> defaultAuth() {
         final AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
-        final AuthorizationScope[] authorizationScopes = new AuthorizationScope[] { authorizationScope };
+        final AuthorizationScope[] authorizationScopes = new AuthorizationScope[]{authorizationScope};
         return Collections.singletonList(new SecurityReference("Bearer", authorizationScopes));
     }
 
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("RCA: Event Management System").description("APIs Documentation")
-                .termsOfServiceUrl("https://github.com/irumvanselme")
-                .version("1.0").build();
+        return new ApiInfoBuilder().title("RCA: Event Management System").description("APIs Documentation").termsOfServiceUrl("https://github.com/irumvanselme").version("1.0").build();
     }
 }
