@@ -22,7 +22,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.servlet.ServletContext;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -62,9 +61,9 @@ public class SwaggerAPIDocConfig extends WebMvcConfigurationSupport {
         return new Docket(DocumentationType.SWAGGER_2).directModelSubstitute(LocalDate.class, Date.class).pathProvider(new RelativePathProvider(servletContext) {
             @Override
             public String getApplicationBasePath() {
-                return "/rca_event_mis";
+                return "/RCAEventMIS";
             }
-        }).select().apis(RequestHandlerSelectors.basePackage("rw.ac.rca.ems.controllers")).paths(PathSelectors.any()).build().apiInfo(apiInfo()).securitySchemes(Arrays.asList(apiKey())).securityContexts(Collections.singletonList(securityContext()));
+        }).select().apis(RequestHandlerSelectors.basePackage("rw.ac.rca.ems.controllers")).paths(PathSelectors.any()).build().apiInfo(apiInfo()).securitySchemes(List.of(apiKey())).securityContexts(Collections.singletonList(securityContext()));
     }
 
     private ApiKey apiKey() {
