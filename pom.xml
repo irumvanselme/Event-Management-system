@@ -116,6 +116,8 @@
     </dependencies>
 
     <build>
+
+        <finalName>RCAEventMIS</finalName>
         <plugins>
 
         </plugins>
