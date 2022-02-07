@@ -61,7 +61,7 @@ public class SwaggerAPIDocConfig extends WebMvcConfigurationSupport {
         return new Docket(DocumentationType.SWAGGER_2).directModelSubstitute(LocalDate.class, Date.class).pathProvider(new RelativePathProvider(servletContext) {
             @Override
             public String getApplicationBasePath() {
-                return "/RCAEventMIS";
+                return "/RCA_Event_MIS";
             }
         }).select().apis(RequestHandlerSelectors.basePackage("rw.ac.rca.ems.controllers")).paths(PathSelectors.any()).build().apiInfo(apiInfo()).securitySchemes(List.of(apiKey())).securityContexts(Collections.singletonList(securityContext()));
     }
